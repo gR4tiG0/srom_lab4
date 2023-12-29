@@ -1,7 +1,7 @@
 #main file for compmath lib, implemetation of operation in normal basis
 from typing import Any
 from compmath.helper import *
-
+from math import log2
 BASE = 64
 
 def mCheck(i:int,j:int,p:int) -> bool:
@@ -143,7 +143,7 @@ class GFelement:
         for i in range(self.m):
         # for i in range(s):
             r = mulStep(a_,b_,m_,self.m)
-            print(f"i = {i},r = {r},totalRes = {res}")
+            # print(f"i = {i},r = {r},totalRes = {res}")
             res ^= r << (self.m - 1 - i) 
             # print("inside mu;")
             # printBin(a_,self.m)
@@ -155,6 +155,32 @@ class GFelement:
             
             # print("new b",bin(b_[0])[2:].zfill(self.m))
         return GFelement(res,self.m,self.matrix)
+    def trace(self):
+        trace = 0
+        d = list(self.words)
+        for elem in d:
+            while elem:
+                trace = (trace + elem%2)%2
+                elem = elem//2
+        return trace
+    def inv(self):
+        y = GFelement(list(self.words),self.m,self.matrix)
+        r = int(log2(self.m - 1)) +1
+        s = self.m - 1
+        for k in range(r):
+            z = getN2powers(y,2**k)
+            print(k)
+            y = y * z
+            print("end of mul in inv")
+            print(y,y**2)
+        y = y**2
+        return y 
+
+def getN2powers(number,n):
+    res = GFelement(number.words,number.m,number.matrix)
+    for i in range(n):
+        res = res**2 
+    return res 
 
 def printBin(a,m):
     res = 0
@@ -225,3 +251,5 @@ def mulStep(a,b,m,size):
     out = out % 2
     # print("out",out)
     return out
+
+    

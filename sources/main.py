@@ -16,16 +16,22 @@ def main() -> None:
     # print(bin(A)[2:].zfill(3),bin(B)[2:].zfill(3))
     # print(a)
     # print(bin(A)[2:])
-    c = a+ b 
-    print("a+b",c)
-    c = a**2
-    print("a**2",c)
+    # c = a+ b 
+    # print("a+b",c)
+    # c = a**2
+    # print("a**2",c)
+    print(a.inv())
     # matrix = bin(fld.matrix.getBase())[2:]
     # for i in range(len(matrix),-1,-fld.m):
         # print(matrix[i-fld.m:i][::-1])
+    print(fld(1).trace())
+    # for i in range(2**fld.m):
+        # print(fld(i).trace(),end="\r")
+    # c = a*b
+    # print("a*b =",bin(c.getBase())[2:].zfill(fld.m))
+    
 
-    c = a*b
-    print("a*b =",bin(c.getBase())[2:].zfill(fld.m))
+
     # matrix = bin(getMatrix(3).getBase())[2:]
     # for i in range(len(matrix),-1,-3):
         # print(matrix[i-3:i][::-1])
