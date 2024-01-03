@@ -15,12 +15,14 @@ def main() -> None:
     # A = getrandbits(BITS)
     # A = 0x2194faab1dca32c6010f1c2bde5d16b9117f76a4eb7707437d836d8187b71fd70c9cbbe870279f075edf30a74f927ebf0f9a10311
     # B = 0x432429824af922ba4eccf2f29e8aa6c121aac32e9cf5f7e2fb79a69937801b38c2a2fcee5927e7d3ac4e3a0af7f1ab6909d7f766f
+    A = 0x2650373e232d078a17fcff4de8c7c926a148afba9b04c93de06cf5abec421633a53f9129b17159dc9d31aeced4bf075bfd20d078
     a,b = fld(A),fld(B)
     # a = fld(0xbedece3753845023034d7db11c303920c3c5e7ba9a020b91e5bb45b21aa3555b6a8f25f37d1936456cc846cb1bb4da6668ecc450)
     # b = fld(2**64 )
-    print(a,b)
+    # print(a,b)
     # print(b.words)
-    print(a**b)
+    print(a)
+    print(a.inv())
     # print(a.trace())
     # B,A = int('011',2),int('101',2)
         # a,b = fld(A),fld(B)

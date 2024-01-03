@@ -208,4 +208,18 @@ class GFelement:
         res = lib.trace(a_c,len(a_))
         return res
 
-    
+    def inv(self):
+        res = GFelement(self.words,self.m,self.matrix)
+        k = 1 
+        n = self.m - 1
+        nL = n.bit_length()
+        for i in range(nL-2,-1,-1):
+            tmp = res
+            for _ in range(k):
+                tmp = tmp**2
+            res = res * tmp
+            k <<= 1
+            if n & (1 << i):
+                res = self * (res**2)
+                k += 1
+        return res**2
