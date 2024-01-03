@@ -59,7 +59,7 @@ class GFelement:
         word_num = m//64 + 1
         if isinstance(number, int):
             if number == 0: words = [0]
-            elif number == 1: words = [1]
+            elif number == 1: words = parse(2**m - 1)
             else: words = parse(number)
             
         elif isinstance(number, list):
@@ -157,6 +157,35 @@ class GFelement:
     def __pow__(self, n):
         if n == 2:
             return self.cycleBR()
+        elif n == 0:
+            return GFelement(0,self.m,self.matrix)
+        elif n == 1:
+            return self 
+        else:
+            if isinstance(n,int):
+                n = GFelement(n,self.m,self.matrix)
+            tmp_a = GFelement(self.words,self.m,self.matrix)
+            res = GFelement(1,self.m,self.matrix)
+            bitL = n.bitLen()
+            word_num = bitL//BASE + 1
+            for i in range(word_num):
+                # print(elem)
+                # print(elem.bit_length())
+                tmp = n.words[i]
+                # print(tmp)
+                k = BASE - tmp.bit_length()
+                while tmp:
+                    # print(tmp%2,end="")
+                    if tmp%2:
+                        res = res * tmp_a 
+                    tmp_a = tmp_a**2 
+                    tmp = tmp//2
+                if i != word_num-1:
+                    for _ in range(k):
+                        # print(0,end="")
+                        tmp_a = tmp_a**2
+            # print()
+            return res
 
     def __mul__(self,other):
         a_ = list(self.words)
@@ -172,4 +201,11 @@ class GFelement:
         lib.gfmul(res,a_c,b_c,m_c,size,mSize,self.m)
         res = list(res)
         return GFelement(res,self.m,self.matrix)
+    
+    def trace(self):
+        a_ = list(self.words)
+        a_c = (ctypes.c_uint64 * len(a_))(*a_)
+        res = lib.trace(a_c,len(a_))
+        return res
 
+    
