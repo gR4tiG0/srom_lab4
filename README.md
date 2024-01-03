@@ -2,7 +2,7 @@
 
 operations in GF(2) (normal basis)
 TODO:
-- add
+- add   | done
 - mul
 - trace
 - exp 
